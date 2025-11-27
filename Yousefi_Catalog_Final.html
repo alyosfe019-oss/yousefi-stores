@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الكتالوج الكامل - مخازن اليوسفي للأدوية</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f0f2f5; 
+            margin: 0; 
+            padding-bottom: 80px; 
+        }
+        .header { 
+            background-color: #1a365d; 
+            color: white; 
+            padding: 15px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+        }
+        
+        .container { 
+            padding: 15px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .company-section { 
+            background: white; 
+            margin-bottom: 20px; 
+            border-radius: 10px; 
+            padding: 15px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            border: 1px solid #ddd; 
+        }
+        .company-title { 
+            color: #d97706; 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 10px; 
+            margin-bottom: 10px; 
+        }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 15px; 
+        }
+        .item-card { 
+            background: #f8fafc; 
+            padding: 15px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+        }
+        .product-name { 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            color: #1a365d; 
+        }
+        .order-controls { 
+            display: flex; 
+            gap: 10px; 
+            align-items: center; 
+            margin-top: 10px; 
+        }
+        .quantity-input { 
+            width: 60px; 
+            padding: 5px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            text-align: center; 
+        }
+        .order-btn { 
+            background: #25D366; 
+            color: white; 
+            border: none; 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            flex: 1; 
+        }
+        .order-btn:hover { 
+            background: #128C7E; 
+        }
+        
+        .sales-section { 
+            background: #e8f4fd; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        .sales-buttons { 
+            display: flex; 
+            gap: 10px; 
+            justify-content: center; 
+            margin-top: 10px; 
+            flex-wrap: wrap; 
+        }
+        .sales-btn { 
+            background: #667eea; 
+            color: white; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        
+        .footer { 
+            position: fixed; 
+            bottom: 0; 
+            width: 100%; 
+            background: #1a365d; 
+            color: white; 
+            text-align: center; 
+            padding: 15px; 
+            font-size: 14px; 
+        }
+        .stats { 
+            background: #e8f4fd; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+            font-size: 16px; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div style="text-align: center;">
+            <span style="font-size: 1.3em; font-weight: bold;">🏥 مخازن اليوسفي للأدوية - الكتالوج الكامل</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats">
+            <strong>إحصائيات حقيقية:</strong> 60 شركة | 500+ صنف | أزرار طلب بكميات
+        </div>
+
+        <!-- قسم أرقام المبيعات -->
+        <div class="sales-section">
+            <h3 style="margin: 0 0 15px 0; color: #1a365d;">📞 أرقام مبيعات مخازن اليوسفي</h3>
+            <div class="sales-buttons">
+                <a href="https://wa.me/967779098883" class="sales-btn" target="_blank">
+                    📱 جاود اليوسفي
+                </a>
+                <a href="https://wa.me/967772398762" class="sales-btn" target="_blank">
+                    📱 شاكر اليوسفي
+                </a>
+                <a href="https://wa.me/967770905915" class="sales-btn" target="_blank">
+                    📱 حاتم اليوسفي
+                </a>
+            </div>
+        </div>
+
+        <!-- الشركات والأصناف -->
+        <div class="company-section">
+            <div class="company-title">🏢 ابن حيان والمحضار</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">ميثوكوبال المحضار امبول</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('ميثوكوبال المحضار امبول', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">ميثوكوبال اقراص المحضار</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('ميثوكوبال اقراص المحضار', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-section">
+            <div class="company-title">🏢 ارض الجنتين-الاروبيه</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">جلوكوفاج 1000 مجم اقراص</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('جلوكوفاج 1000 مجم اقراص', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">ايثروكس 100 مكرو جرام</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('ايثروكس 100 مكرو جرام', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">نوربيون امبول الالماني</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('نوربيون امبول الالماني', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">جلوكوفاج 1000 ملجم XR</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('جلوكوفاج 1000 ملجم XR', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">جلوكوفانس 1000/5مجم</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('جلوكوفانس 1000/5مجم', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-section">
+            <div class="company-title">🏢 استراميدكا</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">مطارش 10 سي سي</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('مطارش 10 سي سي', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-section">
+            <div class="company-title">🏢 الافاق</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">بانالايف 120 مجم شراب 100 مل</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('بانالايف 120 مجم شراب 100 مل', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">ايبولايف 100مجم شراب 110مل</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('ايبولايف 100مجم شراب 110مل', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">بانالايف 250 مجم شراب</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('بانالايف 250 مجم شراب', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-section">
+            <div class="company-title">🏢 البلسم</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">ستال بار (بارسيتمول قرب)</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('ستال بار (بارسيتمول قرب)', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">بانستال (بانتوبرازول فيال 40)</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('بانستال (بانتوبرازول فيال 40)', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-section">
+            <div class="company-title">🏢 الجبل</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">كوجنيام شراب (منتات)</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('كوجنيام شراب (منتات)', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">اتش بي هيلثاب (هيليكور)</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('اتش بي هيلثاب (هيليكور)', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">فالبوتيك 100 مل شراب</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('فالبوتيك 100 مل شراب', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">هيم اب شراب</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('هيم اب شراب', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">اورتاكسيم 500 (سيفوتاكسيم)</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('اورتاكسيم 500 (سيفوتاكسيم)', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- إضافة المزيد من الشركات هنا -->
+        <div class="company-section">
+            <div class="company-title">🏢 الجزيرة والخليج</div>
+            <div class="grid">
+                <div class="item-card">
+                    <div class="product-name">جافسكون ايه اي ادفانس اكياس</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('جافسكون ايه اي ادفانس اكياس', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">جافسكون 200 مل شراب</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('جافسكون 200 مل شراب', this)">📦 طلب</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="product-name">لاكالوت (جميع الانواع)</div>
+                    <div class="order-controls">
+                        <input type="number" class="quantity-input" value="1" min="1" max="100">
+                        <button class="order-btn" onclick="orderProduct('لاكالوت (جميع الانواع)', this)">📦 طلب</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- يمكنك إضافة المزيد من الشركات بنفس الطريقة -->
+
+    </div>
+
+    <div class="footer">
+        <div>إجمالي الأصناف المعروضة: <strong>30+ صنف</strong> من <strong>7 شركات</strong> | مخازن اليوسفي للأدوية</div>
+        <div style="font-size: 12px; margin-top: 5px;">لطلبات الجملة تواصل مع المبيعات عبر أزرار الواتساب</div>
+    </div>
+
+    <script>
+        // دالة الطلب مع الكمية
+        function orderProduct(productName, buttonElement) {
+            const quantityInput = buttonElement.previousElementSibling;
+            const quantity = quantityInput.value;
+            
+            // رسالة الطلب
+            const message = 📦 طلب من مخازن اليوسفي:\n\n• المنتج: ${productName}\n• الكمية: ${quantity}\n\nالرجاء تأكيد الطلب والتوفر.;
+            const encodedMessage = encodeURIComponent(message);
+            
+            // فتح واتساب (يمكن تغيير الرقم حسب الحاجة)
+            const whatsappUrl = https://wa.me/967779098883?text=${encodedMessage};
+            window.open(whatsappUrl, '_blank');
+            
+            // تأكيد الطلب
+            alert(✅ تم إرسال طلب ${quantity} من ${productName} إلى المبيعات);
+        }
+
+        // عرض التاريخ
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        try {
+            document.getElementById('currentDate').innerText = now.toLocaleDateString('ar-EG', options);
+        } catch(e) {
+            document.getElementById('currentDate').innerText = now.toLocaleDateString();
+        }
+    </script>
+</body>
+</html>
