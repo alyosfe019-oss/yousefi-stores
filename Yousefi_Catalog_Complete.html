@@ -77,17 +77,23 @@
         
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 10px; 
         }
         .item-card { 
             background: #f8fafc; 
-            padding: 10px; 
+            padding: 15px; 
             border: 1px solid #e2e8f0; 
-            border-radius: 6px; 
+            border-radius: 8px; 
             font-size: 14px; 
             display: flex; 
+            justify-content: space-between; 
             align-items: center; 
+        }
+        .product-info { 
+            display: flex; 
+            align-items: center; 
+            flex: 1; 
         }
         .dot { 
             height: 8px; 
@@ -96,6 +102,42 @@
             border-radius: 50%; 
             margin-left: 8px; 
             display: inline-block; 
+        }
+        .order-btn { 
+            background: #25D366; 
+            color: white; 
+            border: none; 
+            padding: 8px 12px; 
+            border-radius: 5px; 
+            font-size: 12px; 
+            cursor: pointer; 
+            margin-right: 10px; 
+        }
+        .order-btn:hover { 
+            background: #128C7E; 
+        }
+        
+        .sales-section { 
+            background: #e8f4fd; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        .sales-buttons { 
+            display: flex; 
+            gap: 10px; 
+            justify-content: center; 
+            margin-top: 10px; 
+            flex-wrap: wrap; 
+        }
+        .sales-btn { 
+            background: #667eea; 
+            color: white; 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
         }
         
         .footer { 
@@ -133,6 +175,22 @@
     </div>
 
     <div class="container">
+        <!-- قسم أرقام المبيعات -->
+        <div class="sales-section">
+            <h3 style="margin: 0 0 10px 0; color: #1a365d;">📞 أرقام مبيعات مخازن اليوسفي</h3>
+            <div class="sales-buttons">
+                <a href="https://wa.me/967779098883" class="sales-btn" target="_blank">
+                    📱 جاود اليوسفي
+                </a>
+                <a href="https://wa.me/967772398762" class="sales-btn" target="_blank">
+                    📱 شاكر اليوسفي
+                </a>
+                <a href="https://wa.me/967770905915" class="sales-btn" target="_blank">
+                    📱 حاتم اليوسفي
+                </a>
+            </div>
+        </div>
+
         <div class="stats" id="statsInfo">
             جاري تحميل الإحصائيات...
         </div>
@@ -207,10 +265,31 @@
         const dateEl = document.getElementById('currentDate');
         const statsEl = document.getElementById('statsInfo');
 
+        // أرقام موظفي المبيعات
+        const salesNumbers = {
+            "جاود اليوسفي": "967779098883",
+            "شاكر اليوسفي": "967772398762", 
+            "حاتم اليوسفي": "967770905915"
+        };
+
         function updateStats() {
             const totalCompanies = Object.keys(db).length;
             const totalItems = Object.values(db).reduce((total, items) => total + items.length, 0);
             statsEl.innerHTML = <strong>إحصائيات الكتالوج:</strong> ${totalCompanies} شركة | ${totalItems} صنف | ${totalCompanies} تصنيف;
+        }
+
+        // دالة لإنشاء رسالة الطلب
+        function createOrderMessage(productName, salesPerson) {
+            return مرحبًا، أريد طلب الصنف التالي من مخازن اليوسفي:\n\n📦 *${productName}*\n\nالرجاء إعلامي بالسعر والتوفر.\nشكرًا!;
+        }
+
+        // دالة لفتح محادثة واتساب
+        function openWhatsApp(productName, salesPersonName) {
+            const phoneNumber = salesNumbers[salesPersonName];
+            const message = createOrderMessage(productName, salesPersonName);
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = https://wa.me/${phoneNumber}?text=${encodedMessage};
+            window.open(whatsappUrl, '_blank');
         }
 
         window.onload = function() {
@@ -267,7 +346,19 @@
                     
                     let itemsHTML = '<div class="grid">';
                     items.forEach(function(item) {
-                        itemsHTML += '<div class="item-card"><div class="dot"></div>' + item + '</div>';
+                        itemsHTML += `
+                            <div class="item-card">
+                                <div class="product-info">
+                                    <div class="dot"></div>
+                                    ${item}
+                                </div>
+                                <div>
+                                    <button class="order-btn" onclick="openWhatsApp('${item}', 'جاود اليوسفي')">
+                                        📞 طلب
+                                    </button>
+                                </div>
+                            </div>
+                        `;
                     });
                     itemsHTML += '</div>';
                     
@@ -302,7 +393,12 @@
                 return; 
             }
 
-            text += '📞 لطلب الأصناف يرجى التواصل معنا\n🌹 شكراً لثقتكم';
+            text += '📞 للطلب تواصل مع مبيعاتنا:\n';
+            Object.keys(salesNumbers).forEach(function(salesPerson) {
+                text += `   📱 ${salesPerson}: ${salesNumbers[salesPerson]}\n`;
+            });
+
+            text += '\n🌹 شكراً لثقتكم';
 
             const el = document.createElement('textarea');
             el.value = text;
