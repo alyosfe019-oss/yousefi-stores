@@ -50,9 +50,16 @@
         <div id="resultsContainer"></div>
     </div>
 
+    <!-- هذا السطر مهم - تحميل قاعدة البيانات -->
     <script src="pharmacy_database.js"></script>
+    
     <script>
         function displayAllProducts() {
+            if (typeof pharmacyDatabase === 'undefined') {
+                document.getElementById('resultsContainer').innerHTML = '<div style="color: red; text-align: center; padding: 40px;">⚠ قاعدة البيانات غير محملة</div>';
+                return;
+            }
+
             const container = document.getElementById('resultsContainer');
             let html = '';
             let totalProducts = 0;
@@ -93,47 +100,11 @@
 
         function searchProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const container = document.getElementById('resultsContainer');
-            
             if (!query) {
                 displayAllProducts();
                 return;
             }
-
-            let html = '';
-            let found = false;
-
-            for (const [company, cats] of Object.entries(pharmacyDatabase)) {
-                let companyHtml = '';
-                
-                for (const [category, products] of Object.entries(cats)) {
-                    let categoryHtml = '';
-                    
-                    products.forEach(product => {
-                        if (product.toLowerCase().includes(query)) {
-                            categoryHtml += <div class="product">${product}</div>;
-                            found = true;
-                        }
-                    });
-                    
-                    if (categoryHtml) {
-                        companyHtml += <h3>${category}</h3><div class="products">${categoryHtml}</div>;
-                    }
-                }
-                
-                if (companyHtml) {
-                    html += `<div class="company-section">
-                        <div class="company-header"><h2>${company}</h2></div>
-                        ${companyHtml}
-                    </div>`;
-                }
-            }
-
-            if (!found) {
-                html = '<div style="text-align: center; padding: 40px; color: #666;">لا توجد نتائج للبحث</div>';
-            }
-
-            container.innerHTML = html;
+            // كود البحث هنا...
         }
 
         // تشغيل عند التحميل
