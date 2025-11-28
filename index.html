@@ -3,39 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏥 كتالوج صيدليات اليوسفي - الإصدار النهائي</title>
+    <title>🏥 كتالوج صيدليات اليوسفي - الإصدار العامل</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f0f8ff; direction: rtl; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
-        header { background: #2c5aa0; color: white; padding: 25px; border-radius: 15px; margin-bottom: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        header { background: #2c5aa0; color: white; padding: 25px; border-radius: 15px; margin-bottom: 25px; text-align: center; }
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 25px; }
-        .stat-card { background: white; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 2px solid #e0e0e0; }
-        .stat-card h3 { color: #666; margin-bottom: 10px; font-size: 1.1em; }
-        .stat-card span { font-size: 2.5em; font-weight: bold; color: #2c5aa0; display: block; }
+        .stat-card { background: white; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .stat-card span { font-size: 2.5em; font-weight: bold; color: #2c5aa0; }
         .company-section { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .company-header { background: #2c5aa0; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .company-header h2 { font-size: 1.6em; margin: 0; }
-        .category { margin: 25px 0; }
-        .category h3 { color: #2c5aa0; margin-bottom: 15px; font-size: 1.3em; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
         .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-        .product { background: #f8f9fa; padding: 15px; border-radius: 8px; border-right: 5px solid #2c5aa0; border-left: 1px solid #e0e0e0; transition: all 0.3s ease; }
-        .product:hover { background: #e3f2fd; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
-        .success-message { background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; text-align: center; margin: 20px 0; border: 1px solid #c3e6cb; }
+        .product { background: #f8f9fa; padding: 15px; border-radius: 8px; border-right: 5px solid #2c5aa0; margin-bottom: 8px; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🏥 كتالوج صيدليات اليوسفي</h1>
-            <p>الإصدار النهائي - جميع الشركات والأصناف متاحة</p>
+            <h1>🏥 كتالوج صيدليات اليوسفي - الإصدار العامل ✅</h1>
+            <p>جميع البيانات من pharmacy_database.js</p>
         </header>
-
-        <div class="success-message">
-            <h3>✅ النظام يعمل بنجاح!</h3>
-            <p>تم تحميل جميع البيانات بنجاح من قاعدة البيانات</p>
-        </div>
 
         <div class="stats">
             <div class="stat-card">
@@ -59,14 +47,20 @@
         </div>
     </div>
 
+    <!-- تحميل قاعدة البيانات -->
     <script src="pharmacy_database.js"></script>
+    
     <script>
+        // تأكد من تحميل البيانات أولاً
+        console.log("🔍 التحقق من قاعدة البيانات:", typeof pharmacyDatabase);
+        console.log("🏢 عدد الشركات:", Object.keys(pharmacyDatabase).length);
+        
         function displayAllProducts() {
-            console.log("✅ بدء تحميل البيانات...");
+            console.log("🚀 بدء عرض البيانات...");
             
             if (typeof pharmacyDatabase === 'undefined') {
                 document.getElementById('resultsContainer').innerHTML = 
-                    '<div style="color: red; text-align: center; padding: 40px; font-size: 1.2em;">❌ خطأ: قاعدة البيانات غير محملة</div>';
+                    '<div style="color: red; text-align: center; padding: 40px;">❌ خطأ: قاعدة البيانات غير محملة</div>';
                 return;
             }
 
@@ -76,24 +70,25 @@
             let companies = new Set();
             let categories = new Set();
 
+            // عرض كل الشركات
             for (const [company, cats] of Object.entries(pharmacyDatabase)) {
                 companies.add(company);
                 let companyHtml = '';
                 
+                // عرض كل التصنيفات
                 for (const [category, products] of Object.entries(cats)) {
                     categories.add(category);
                     let categoryHtml = '';
                     
+                    // عرض كل المنتجات
                     products.forEach(product => {
                         totalProducts++;
                         categoryHtml += <div class="product">${product}</div>;
                     });
                     
                     if (categoryHtml) {
-                        companyHtml += `<div class="category">
-                            <h3>${category}</h3>
-                            <div class="products">${categoryHtml}</div>
-                        </div>`;
+                        companyHtml += `<h3 style="color: #2c5aa0; margin: 20px 0 15px 0; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">${category}</h3>
+                        <div class="products">${categoryHtml}</div>`;
                     }
                 }
                 
@@ -105,19 +100,20 @@
                 }
             }
 
+            // تحديث الصفحة
             container.innerHTML = html;
             document.getElementById('totalProducts').textContent = totalProducts;
             document.getElementById('totalCompanies').textContent = companies.size;
             document.getElementById('totalCategories').textContent = categories.size;
 
-            console.log("✅ تم تحميل " + totalProducts + " منتج بنجاح");
+            console.log("✅ تم العرض:", totalProducts + " منتج, " + companies.size + " شركة, " + categories.size + " تصنيف");
         }
 
-        // تشغيل عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("✅ الصفحة محملة - بدء عرض البيانات");
+        // تشغيل بعد تحميل الصفحة بالكامل
+        window.onload = function() {
+            console.log("📄 الصفحة محملة بالكامل - بدء العرض");
             displayAllProducts();
-        });
+        };
     </script>
 </body>
 </html>
