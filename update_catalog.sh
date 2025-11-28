@@ -1,0 +1,161 @@
+#!/bin/bash
+
+echo "🔄 بدء تحديث كتالوج صيدليات اليوسفي..."
+
+# إنشاء ملف index.html محدث
+cat > index.html << 'HTML_EOF'
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏥 كتالوج صيدليات اليوسفي</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; direction: rtl; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { background: #2c3e50; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; }
+        .search-box { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .search-box input { padding: 10px; width: 300px; margin-left: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .search-box button { padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .company-section { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .company-header { background: #3498db; color: white; padding: 15px; border-radius: 5px; margin-bottom: 15px; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+        .product { background: #ecf0f1; padding: 10px; border-radius: 5px; border-right: 4px solid #3498db; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 كتالوج صيدليات اليوسفي</h1>
+            <p>النسخة المحدثة - جميع الشركات والأصناف</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث عن دواء..." onkeyup="searchProducts()">
+            <button onclick="searchProducts()">بحث</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>إجمالي الأدوية</h3>
+                <span id="totalProducts">0</span>
+            </div>
+            <div class="stat-card">
+                <h3>الشركات</h3>
+                <span id="totalCompanies">0</span>
+            </div>
+            <div class="stat-card">
+                <h3>التصنيفات</h3>
+                <span id="totalCategories">0</span>
+            </div>
+        </div>
+
+        <div id="resultsContainer"></div>
+    </div>
+
+    <script src="pharmacy_database.js"></script>
+    <script>
+        function displayAllProducts() {
+            const container = document.getElementById('resultsContainer');
+            let html = '';
+            let totalProducts = 0;
+            let companies = new Set();
+            let categories = new Set();
+
+            for (const [company, cats] of Object.entries(pharmacyDatabase)) {
+                companies.add(company);
+                let companyHtml = '';
+                
+                for (const [category, products] of Object.entries(cats)) {
+                    categories.add(category);
+                    let categoryHtml = '';
+                    
+                    products.forEach(product => {
+                        totalProducts++;
+                        categoryHtml += <div class="product">${product}</div>;
+                    });
+                    
+                    if (categoryHtml) {
+                        companyHtml += <h3>${category}</h3><div class="products">${categoryHtml}</div>;
+                    }
+                }
+                
+                if (companyHtml) {
+                    html += `<div class="company-section">
+                        <div class="company-header"><h2>${company}</h2></div>
+                        ${companyHtml}
+                    </div>`;
+                }
+            }
+
+            container.innerHTML = html;
+            document.getElementById('totalProducts').textContent = totalProducts;
+            document.getElementById('totalCompanies').textContent = companies.size;
+            document.getElementById('totalCategories').textContent = categories.size;
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const container = document.getElementById('resultsContainer');
+            
+            if (!query) {
+                displayAllProducts();
+                return;
+            }
+
+            let html = '';
+            let found = false;
+
+            for (const [company, cats] of Object.entries(pharmacyDatabase)) {
+                let companyHtml = '';
+                
+                for (const [category, products] of Object.entries(cats)) {
+                    let categoryHtml = '';
+                    
+                    products.forEach(product => {
+                        if (product.toLowerCase().includes(query)) {
+                            categoryHtml += <div class="product">${product}</div>;
+                            found = true;
+                        }
+                    });
+                    
+                    if (categoryHtml) {
+                        companyHtml += <h3>${category}</h3><div class="products">${categoryHtml}</div>;
+                    }
+                }
+                
+                if (companyHtml) {
+                    html += `<div class="company-section">
+                        <div class="company-header"><h2>${company}</h2></div>
+                        ${companyHtml}
+                    </div>`;
+                }
+            }
+
+            if (!found) {
+                html = '<div style="text-align: center; padding: 40px; color: #666;">لا توجد نتائج للبحث</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // تشغيل عند التحميل
+        document.addEventListener('DOMContentLoaded', displayAllProducts);
+    </script>
+</body>
+</html>
+HTML_EOF
+
+echo "✅ تم إنشاء index.html المحدث"
+
+# تحديث git
+git add index.html
+git commit -m "🎉 تحديث الكتالوج - عرض جميع الشركات والأصناف من قاعدة البيانات الجديدة"
+git push origin main
+
+echo "🎊 تم التحديث بنجاح!"
+echo "📊 الكتالوج الآن يعرض جميع البيانات من pharmacy_database.js"
+echo "🌐 افتح index.html في المتصفح لمشاهدة النتائج"

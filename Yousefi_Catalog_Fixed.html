@@ -1,203 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الكتالوج الكامل - مخازن اليوسفي للأدوية</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f0f2f5; 
-            margin: 0; 
-            padding-bottom: 60px; 
-        }
-        .header { 
-            background-color: #1a365d; 
-            color: white; 
-            padding: 15px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
-        }
-        .controls { 
-            display: flex; 
-            gap: 10px; 
-            margin-top: 10px; 
-        }
-        select, input { 
-            padding: 10px; 
-            border-radius: 5px; 
-            border: 1px solid #ccc; 
-            font-size: 16px; 
-        }
-        select { flex: 1; }
-        input { flex: 2; }
-        .btn-wa { 
-            background-color: #25D366; 
-            color: white; 
-            border: none; 
-            padding: 8px 15px; 
-            border-radius: 5px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            float: left; 
-        }
-        
-        .container { 
-            padding: 15px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .company-section { 
-            background: white; 
-            margin-bottom: 20px; 
-            border-radius: 10px; 
-            padding: 15px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
-            border: 1px solid #ddd; 
-        }
-        .company-title { 
-            color: #d97706; 
-            font-size: 1.2em; 
-            font-weight: bold; 
-            border-bottom: 2px solid #eee; 
-            padding-bottom: 10px; 
-            margin-bottom: 10px; 
-        }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 10px; 
-        }
-        .item-card { 
-            background: #f8fafc; 
-            padding: 12px; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 6px; 
-            font-size: 14px; 
-        }
-        
-        .footer { 
-            position: fixed; 
-            bottom: 0; 
-            width: 100%; 
-            background: #1a365d; 
-            color: white; 
-            text-align: center; 
-            padding: 10px; 
-            font-size: 12px; 
-        }
-        .stats { 
-            background: #e8f4fd; 
-            padding: 10px; 
-            border-radius: 5px; 
-            margin-bottom: 15px; 
-            text-align: center; 
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <div style="overflow: hidden;">
-            <span style="font-size: 1.2em; font-weight: bold;">🏥 مخازن اليوسفي للأدوية - الكتالوج الكامل</span>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="stats">
-            <strong>إحصائيات الكتالوج:</strong> 60+ شركة | 500+ صنف
-        </div>
-
-        <!-- عرض البيانات مباشرة بدون JavaScript -->
-        <div class="company-section">
-            <div class="company-title">🏢 ابن حيان والمحضار</div>
-            <div class="grid">
-                <div class="item-card">• ميثوكوبال المحضار امبول</div>
-                <div class="item-card">• ميثوكوبال اقراص المحضار</div>
-            </div>
-        </div>
-
-        <div class="company-section">
-            <div class="company-title">🏢 ارض الجنتين-الاروبيه</div>
-            <div class="grid">
-                <div class="item-card">• جلوكوفاج 1000 مجم اقراص</div>
-                <div class="item-card">• ايثروكس 100 مكرو جرام</div>
-                <div class="item-card">• نوربيون امبول الالماني</div>
-                <div class="item-card">• جلوكوفاج 1000 ملجم XR</div>
-                <div class="item-card">• جلوكوفانس 1000/5مجم</div>
-            </div>
-        </div>
-
-        <div class="company-section">
-            <div class="company-title">🏢 استراميدكا</div>
-            <div class="grid">
-                <div class="item-card">• مطارش 10 سي سي</div>
-            </div>
-        </div>
-
-        <div class="company-section">
-            <div class="company-title">🏢 الافاق</div>
-            <div class="grid">
-                <div class="item-card">• بانالايف 120 مجم شراب 100 مل</div>
-                <div class="item-card">• ايبولايف 100مجم شراب 110مل</div>
-                <div class="item-card">• بانالايف 250 مجم شراب</div>
-            </div>
-        </div>
-
-        <div class="company-section">
-            <div class="company-title">🏢 البلسم</div>
-            <div class="grid">
-                <div class="item-card">• ستال بار (بارسيتمول قرب)</div>
-                <div class="item-card">• بانستال (بانتوبرازول فيال 40)</div>
-            </div>
-        </div>
-
-        <div class="company-section">
-            <div class="company-title">🏢 الجبل</div>
-            <div class="grid">
-                <div class="item-card">• كوجنيام شراب (منتات)</div>
-                <div class="item-card">• اتش بي هيلثاب (هيليكور)</div>
-                <div class="item-card">• فالبوتيك 100 مل شراب</div>
-                <div class="item-card">• هيم اب شراب</div>
-                <div class="item-card">• اورتاكسيم 500 (سيفوتاكسيم)</div>
-            </div>
-        </div>
-
-        <!-- قسم أرقام المبيعات -->
-        <div style="background: #e8f4fd; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
-            <h3 style="margin: 0 0 15px 0; color: #1a365d;">📞 أرقام مبيعات مخازن اليوسفي</h3>
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://wa.me/967779098883" style="background: #25D366; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;" target="_blank">
-                    📱 جاود اليوسفي
-                </a>
-                <a href="https://wa.me/967772398762" style="background: #25D366; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;" target="_blank">
-                    📱 شاكر اليوسفي
-                </a>
-                <a href="https://wa.me/967770905915" style="background: #25D366; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;" target="_blank">
-                    📱 حاتم اليوسفي
-                </a>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        إجمالي الأصناف: <strong>500+ صنف</strong> | 
-        <span id="currentDate"></span>
-    </div>
-
-    <script>
-        // عرض التاريخ فقط
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        try {
-            document.getElementById('currentDate').innerText = now.toLocaleDateString('ar-EG', options);
-        } catch(e) {
-            document.getElementById('currentDate').innerText = now.toLocaleDateString();
-        }
-    </script>
-</body>
-</html>
